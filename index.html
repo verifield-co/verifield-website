@@ -2,288 +2,183 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VeriField | Field Operations Verification Platform</title>
-<meta name="description" content="VeriField verifies field work with GPS check-ins, QR and barcode verification, photo evidence and professional reports.">
+<meta name="description" content="VeriField verifies field work with GPS verification, QR and barcode check-ins, photo evidence, and clear reports.">
 <style>
 :root{
-  --navy:#031a3b; --navy2:#071f47; --blue:#1677ff; --green:#08bf68;
-  --text:#071b3b; --muted:#61708a; --line:#dfe7f2; --white:#fff;
+  --navy:#061936; --navy2:#0a2855; --blue:#087cff; --green:#00bd68;
+  --ink:#092044; --muted:#5d6d86; --white:#fff; --light:#f5f8fc;
+  --line:#d9e2ee; --shadow:0 18px 45px rgba(2,20,52,.18);
 }
-*{box-sizing:border-box} html{scroll-behavior:smooth}
-body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:#f6f9fc}
-a{text-decoration:none;color:inherit}.wrap{width:min(1340px,92%);margin:auto}
-header{position:sticky;top:0;z-index:20;background:rgba(3,18,43,.96);border-bottom:1px solid rgba(255,255,255,.09);backdrop-filter:blur(12px)}
-.nav{height:82px;display:flex;align-items:center;justify-content:space-between;gap:30px}
-.brand img{display:block;width:225px;height:auto;object-fit:contain;object-position:left center;filter:none}
-.navlinks{display:flex;gap:34px;align-items:center;color:#fff;font-weight:650;font-size:15px}
-.navlinks a{opacity:.95}.navlinks a:hover{color:#47a0ff}
-.navactions{display:flex;gap:12px;align-items:center}.btn{padding:13px 23px;border-radius:7px;font-weight:750;border:1px solid rgba(255,255,255,.22);color:#fff}
-.btn.green{background:var(--green);border-color:var(--green)}.btn.green:hover{background:#06aa5c}
-.btn.ghost:hover{background:rgba(255,255,255,.07)}
-.hero{background:linear-gradient(110deg,#041a3b 0%,#082c61 62%,#0a3b79 100%);color:#fff;padding:72px 0 82px;overflow:hidden}
-.heroGrid{display:grid;grid-template-columns: .86fr 1.14fr;gap:52px;align-items:center}
-.eyebrow{color:#43a0ff;font-size:14px;letter-spacing:2px;font-weight:800;margin-bottom:18px}
-h1{font-size:clamp(50px,6vw,82px);line-height:.96;margin:0 0 24px;letter-spacing:-3px}
-h1 span{color:#1680ff} h1 em{color:#12c66d;font-style:normal}
-.lead{font-size:20px;line-height:1.65;color:#e8f0fb;max-width:610px}
-.heroBtns{display:flex;gap:14px;margin:28px 0}.heroBtns .btn{padding:15px 25px}
-.pills{display:flex;gap:22px;flex-wrap:wrap;color:#fff;font-size:14px;font-weight:700;margin-top:30px}
-.pills b{color:#19c76f;margin-right:6px}
-.dashboard{background:#fff;border-radius:18px;box-shadow:0 22px 60px rgba(0,0,0,.35);overflow:hidden;border:2px solid rgba(255,255,255,.22)}
-.dtop{height:66px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e5ebf4;color:#10264a;font-weight:800}
-.dbrand{display:flex;align-items:center;gap:8px}.dbrand img{width:112px;height:34px;object-fit:contain;object-position:left center}
-.dbody{padding:22px;background:#fbfcfe}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.stat{background:#fff;border:1px solid #e1e8f2;border-radius:10px;padding:15px}.stat small{color:#66758c}.stat strong{display:block;font-size:26px;margin-top:6px}.greenText{color:#08ad61}
-.table{margin-top:14px;background:#fff;border:1px solid #e1e8f2;border-radius:10px;overflow:hidden}.tr{display:grid;grid-template-columns:1.2fr 1.2fr .8fr .9fr .5fr .5fr;padding:11px 14px;border-bottom:1px solid #edf1f6;font-size:12px;align-items:center}.tr:last-child{border-bottom:0}.th{font-weight:800;color:#51617a;background:#f8fafc}.ok{color:#0ba961;font-weight:800}
-.section{padding:86px 0}.center{text-align:center}.eyebrow.dark{color:#388df8}.section h2{font-size:46px;line-height:1.08;margin:8px 0 14px;letter-spacing:-1.6px}.sub{font-size:18px;color:var(--muted);max-width:780px;margin:0 auto;line-height:1.65}
-.features{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:42px}.feature{background:#fff;border:1px solid var(--line);border-radius:15px;padding:25px;box-shadow:0 8px 25px rgba(7,27,59,.05)}
-.icon{width:50px;height:50px;border-radius:14px;background:#eaf3ff;color:#0877ff;display:grid;place-items:center;font-size:24px;font-weight:900}.feature h3{margin:18px 0 8px}.feature p{color:var(--muted);line-height:1.55;margin:0}
-.industries{background:#061f45;color:#fff;padding:48px 0 72px}.industries h2{font-size:32px;margin:0 0 6px}.underline{width:54px;height:3px;background:#12c66d;margin:0 0 24px}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{background:#fff;color:var(--text);border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.16)}.card img{display:block;width:100%;height:180px;object-fit:cover}.cardbody{padding:18px 17px 20px}.tag{font-size:13px;font-weight:800}.tag.clean{color:#0675e8}.tag.facility{color:#08a85b}.tag.build{color:#f48a08}.tag.service{color:#6e4ee8}.card h3{margin:4px 0 4px;font-size:19px}.card p{margin:8px 0 14px;color:#4d5c73;line-height:1.45;font-size:14px}.learn{color:#0876ed;font-weight:800;font-size:14px}
-.how{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}.steps{margin-top:28px}.step{display:grid;grid-template-columns:50px 1fr;gap:16px;margin:22px 0}.num{width:44px;height:44px;border-radius:50%;background:#eaf3ff;color:#0876ed;display:grid;place-items:center;font-weight:900}.step h3{margin:0 0 5px}.step p{margin:0;color:var(--muted);line-height:1.5}.panel{background:#061f45;border-radius:18px;color:#fff;padding:36px;min-height:350px}.panel h3{font-size:29px;margin:0 0 10px}.check{display:flex;gap:10px;align-items:center;margin:16px 0;color:#e7f0fc}.check i{font-style:normal;color:#16cb70;font-weight:900}
-.cta{background:linear-gradient(115deg,#05204a,#0b3c7a);color:#fff;padding:72px 0}.ctaBox{display:flex;align-items:center;justify-content:space-between;gap:30px}.cta h2{font-size:44px;margin:0 0 10px}.cta p{color:#d8e5f5;font-size:18px;max-width:720px}
-footer{background:#02152f;color:#aebed5;padding:32px 0}.foot{display:flex;justify-content:space-between;align-items:center}.foot img{width:175px}
-@media(max-width:1050px){.navlinks{display:none}.heroGrid,.how{grid-template-columns:1fr}.features,.cards{grid-template-columns:repeat(2,1fr)}.hero{padding-top:55px}.dashboard{max-width:850px;margin:auto}}
-@media(max-width:650px){.nav{height:70px}.brand img{width:170px}.navactions .ghost{display:none}.features,.cards{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.tr{grid-template-columns:1.2fr 1fr .7fr .7fr}.tr span:nth-child(5),.tr span:nth-child(6){display:none}h1{letter-spacing:-2px}.heroBtns{flex-direction:column}.btn{text-align:center}.section{padding:62px 0}.section h2,.cta h2{font-size:36px}.card img{height:210px}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--white)}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(1180px,92%);margin:auto}
+header{height:78px;background:#061936;color:white;border-bottom:1px solid rgba(255,255,255,.12);display:flex;align-items:center;position:relative;z-index:10}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:28px}
+.brand img{display:block;width:205px;height:auto;max-height:54px;object-fit:contain;object-position:left center}
+nav{display:flex;align-items:center;gap:32px;font-size:15px;font-weight:600}
+nav a{opacity:.92}
+nav a:hover{color:#62b0ff}
+.actions{display:flex;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 20px;border-radius:7px;font-weight:800;font-size:15px}
+.btn-outline{border:1px solid #315174;color:white}
+.btn-green{background:var(--green);color:white;box-shadow:0 8px 20px rgba(0,189,104,.18)}
+.hero{background:linear-gradient(120deg,#061936 0%,#09285a 100%);color:white;padding:64px 0 78px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:42% 58%;align-items:center;gap:20px}
+.eyebrow{color:#4ba6ff;font-size:13px;letter-spacing:2px;font-weight:900;margin-bottom:18px}
+h1{font-size:clamp(48px,5.3vw,76px);line-height:.98;margin:0 0 22px;letter-spacing:-3px}
+h1 .blue{color:#087cff} h1 .green{color:#00bd68}
+.lead{font-size:18px;line-height:1.7;color:#eef5ff;max-width:570px;margin:0 0 26px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.proof-row{display:flex;gap:26px;flex-wrap:wrap;margin-top:28px;font-size:13px;font-weight:800;color:#eaf3ff}
+.proof-row span{display:flex;align-items:center;gap:7px}
+.proof-row b{color:#00bd68;font-size:16px}
 
-/* ===== VeriField Mobile Responsive ===== */
-@media (max-width: 900px) {
-  html { overflow-x: hidden; }
-  body { overflow-x: hidden; }
+.visual{position:relative;min-height:430px;padding:10px 0 0 28px}
+.dashboard{background:#fff;border:1px solid #cfd9e6;border-radius:18px;box-shadow:var(--shadow);overflow:hidden;width:92%;margin-left:auto;color:#10213d}
+.dash-top{height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid #e0e6ef}
+.dash-brand{font-size:19px;font-weight:900;display:flex;align-items:center;gap:8px}
+.dash-brand .mark{width:19px;height:19px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#087cff;position:relative}
+.dash-brand .mark:after{content:"";position:absolute;width:7px;height:7px;background:#fff;border-radius:50%;left:6px;top:6px}
+.dash-title{font-weight:900;font-size:18px}
+.dash-sub{font-size:10px;color:#6d7b90;margin-top:3px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:18px}
+.stat{border:1px solid #e1e7ef;border-radius:10px;padding:13px;background:#fff}
+.stat small{display:block;color:#65748b;font-size:10px;margin-bottom:7px}.stat strong{font-size:24px}
+.stat .ok{color:#00a95c}
+.table{margin:0 18px 18px;border:1px solid #e1e7ef;border-radius:10px;overflow:hidden}
+.tr{display:grid;grid-template-columns:1.3fr 1.2fr .8fr .8fr .45fr .45fr;padding:10px 12px;gap:8px;font-size:10px;border-bottom:1px solid #edf1f6;align-items:center}
+.tr.head{font-weight:900;background:#f7f9fc;color:#56667d}.tr:last-child{border-bottom:0}
+.complete{color:#00a95c;font-weight:900}.check{color:#00a95c;font-size:14px;font-weight:900}
+.bottom-panels{display:grid;grid-template-columns:1fr 1.25fr;gap:12px;margin:0 18px 18px}
+.mini{border:1px solid #e1e7ef;border-radius:10px;padding:14px;min-height:115px}
+.mini-title{font-size:11px;font-weight:900;margin-bottom:12px}
+.donut{width:70px;height:70px;border-radius:50%;background:conic-gradient(#00bd68 0 82%,#ffad25 82% 95%,#e95043 95%);position:relative;margin:auto}
+.donut:after{content:"95%";position:absolute;inset:12px;background:white;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:12px}
+.map{height:78px;border-radius:8px;background:linear-gradient(145deg,#dcefe9,#f4f8f5);position:relative;overflow:hidden}
+.map:before,.map:after{content:"";position:absolute;background:white;opacity:.9;transform:rotate(25deg);width:130%;height:7px;top:35px;left:-15px}
+.map:after{transform:rotate(-32deg);top:48px}
+.pin{position:absolute;width:12px;height:12px;background:#087cff;border:3px solid white;border-radius:50%;box-shadow:0 2px 5px #789;z-index:2}
 
-  .wrap, .hero .wrap, .center {
-    width: min(94%, 680px);
-    margin-left: auto;
-    margin-right: auto;
-  }
+.phone{position:absolute;right:-4px;bottom:-20px;width:188px;background:#06101f;border:5px solid #18283f;border-radius:28px;padding:8px;box-shadow:0 20px 40px rgba(0,0,0,.35);z-index:3}
+.phone-screen{background:#f7f9fc;border-radius:20px;overflow:hidden;min-height:355px}
+.phone-head{height:54px;background:#061936;color:#fff;padding:11px 12px;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:space-between}
+.phone-body{padding:12px}.phone-title{font-size:14px;font-weight:900;margin:3px 0 12px}
+.scan{background:#061936;color:#fff;border-radius:8px;padding:14px 8px;text-align:center;font-weight:900;font-size:12px;margin-bottom:12px}
+.or{text-align:center;color:#8390a3;font-size:10px;margin:10px}
+.select{background:white;border:1px solid #dbe2eb;border-radius:7px;padding:11px;font-size:10px;color:#6b7789}
+.gps-ok{margin-top:10px;background:#eafaf3;color:#00884d;border-radius:7px;padding:9px;font-size:10px;font-weight:900}
+.phone-nav{display:flex;justify-content:space-around;padding:10px 5px;background:#fff;border-top:1px solid #e2e7ef;font-size:8px;color:#44546c}
 
-  header .wrap, header > div {
-    flex-wrap: wrap;
-    gap: 14px;
-  }
+.section{padding:78px 0}.section.light{background:#f7f9fc}.center{text-align:center}
+.kicker{color:#147df5;font-size:12px;letter-spacing:2px;font-weight:900}.section h2{font-size:42px;line-height:1.1;margin:10px 0 12px;letter-spacing:-1.5px}.section-intro{max-width:720px;margin:0 auto 34px;color:#65748b;line-height:1.7}
+.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.feature{background:#fff;border:1px solid #dce4ee;border-radius:10px;padding:25px 20px;box-shadow:0 8px 24px rgba(20,45,80,.05)}
+.icon{width:42px;height:42px;border-radius:10px;background:#edf5ff;color:#087cff;display:grid;place-items:center;font-weight:900;margin-bottom:15px}.feature h3{margin:0 0 8px;font-size:17px}.feature p{margin:0;color:#66758b;font-size:13px;line-height:1.6}
 
-  nav {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 14px;
-    order: 3;
-  }
+.industry{background:#071f45;color:white;padding:54px 0 70px}.industry-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:20px}.industry h2{font-size:27px;margin:0}.under{width:46px;height:3px;background:#00bd68;margin-top:10px}
+.industry-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.industry-card{background:white;color:#10213d;border-radius:10px;overflow:hidden}.industry-card img{width:100%;height:190px;object-fit:cover;display:block}.industry-card .content{padding:17px}.industry-card h3{margin:0 0 3px;font-size:17px}.industry-card .type{font-weight:800;font-size:12px;margin-bottom:10px}.industry-card p{font-size:12px;line-height:1.5;color:#53627a;min-height:54px}.learn{color:#087cff;font-size:12px;font-weight:900}
 
-  .hero .wrap,
-  .hero .grid,
-  .grid,
-  .hero-grid {
-    grid-template-columns: 1fr !important;
-  }
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}.steps{display:grid;gap:16px;margin-top:25px}.step{display:grid;grid-template-columns:38px 1fr;gap:13px}.num{width:30px;height:30px;border-radius:50%;background:#edf5ff;color:#087cff;display:grid;place-items:center;font-weight:900;font-size:12px}.step h4{margin:0 0 3px}.step p{margin:0;color:#68768b;font-size:12px;line-height:1.5}.verification{background:#071f45;color:white;border-radius:10px;padding:28px}.verification h3{margin:0 0 16px}.verification li{margin:11px 0;font-size:12px;list-style:none}.verification ul{padding:0;margin:0}.verification li:before{content:"✓";color:#00bd68;font-weight:900;margin-right:8px}
 
-  .hero {
-    padding: 54px 0 58px;
-  }
+.cta{background:#0b3168;color:white;padding:45px 0}.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}.cta h2{margin:0 0 7px;font-size:28px}.cta p{margin:0;color:#d9e6f7;font-size:13px}
+footer{background:#061936;color:#aabbd1;padding:28px 0;font-size:12px}.foot{display:flex;justify-content:space-between;align-items:center}.foot strong{color:white;font-size:18px}
 
-  h1 {
-    font-size: clamp(42px, 10vw, 68px);
-    line-height: .98;
-  }
-
-  .hero-copy, .hero-text {
-    max-width: 100% !important;
-  }
-
-  .dashboard,
-  .dashboard-preview,
-  .phone {
-    width: 100% !important;
-    max-width: 680px;
-    margin: 10px auto 0;
-  }
-
-  .features,
-  .feature-grid,
-  .industry-grid,
-  .cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-
-  .industry-card img,
-  .card img {
-    width: 100%;
-    height: 210px;
-    object-fit: cover;
-  }
-
-  .cta .box,
-  .cta-box {
-    width: 100%;
-  }
+@media(max-width:1000px){
+ nav{gap:16px}.hero-grid{grid-template-columns:1fr}.visual{padding:25px 0 40px;min-height:480px}.dashboard{width:92%;margin:auto}.feature-grid,.industry-grid{grid-template-columns:repeat(2,1fr)}.how-grid{grid-template-columns:1fr}
 }
-
-@media (max-width: 600px) {
-  header {
-    padding: 14px 0;
-  }
-
-  header .brand img,
-  .brand img {
-    height: 42px !important;
-    width: auto;
-    max-width: 190px;
-  }
-
-  header .wrap {
-    justify-content: center;
-  }
-
-  nav {
-    font-size: 14px;
-    gap: 10px 16px;
-  }
-
-  .header-actions,
-  header .actions {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .hero {
-    padding: 38px 0 44px;
-  }
-
-  .hero .wrap, .wrap, .center {
-    width: min(92%, 520px);
-  }
-
-  h1 {
-    font-size: clamp(38px, 12vw, 54px);
-  }
-
-  h2 {
-    font-size: clamp(30px, 8vw, 42px);
-  }
-
-  p {
-    font-size: 16px;
-    line-height: 1.65;
-  }
-
-  .buttons,
-  .hero-buttons {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .buttons a,
-  .hero-buttons a,
-  .buttons button,
-  .hero-buttons button {
-    width: 100%;
-    text-align: center;
-  }
-
-  .features,
-  .feature-grid,
-  .industry-grid,
-  .cards {
-    grid-template-columns: 1fr !important;
-  }
-
-  .industry-card img,
-  .card img {
-    height: 220px;
-  }
-
-  .dashboard {
-    overflow-x: auto;
-  }
-
-  footer .wrap {
-    flex-direction: column;
-    text-align: center;
-    gap: 18px;
-  }
+@media(max-width:680px){
+ header{height:auto;padding:12px 0}.header-inner{flex-wrap:wrap;justify-content:center}.brand img{width:170px}nav{order:3;width:100%;justify-content:center;flex-wrap:wrap;font-size:12px;gap:10px 16px}.actions{width:100%;justify-content:center}.actions .btn{padding:9px 14px;font-size:12px}
+ .hero{padding:42px 0 50px}.hero-grid{display:block}.eyebrow{font-size:10px}.lead{font-size:15px}.proof-row{gap:12px;font-size:10px}
+ h1{font-size:48px;letter-spacing:-2px}.visual{min-height:390px;padding:20px 0 45px}.dashboard{width:100%;border-radius:12px}.dash-top{height:45px;padding:0 12px}.dash-title{font-size:12px}.dash-brand{font-size:13px}.stats{padding:10px;gap:5px}.stat{padding:8px}.stat small{font-size:7px}.stat strong{font-size:16px}.table{margin:0 10px 10px}.tr{padding:7px 6px;font-size:7px;gap:4px}.bottom-panels{margin:0 10px 10px;gap:5px}.mini{padding:8px;min-height:80px}.mini-title{font-size:8px}.phone{width:138px;right:-4px;bottom:-8px;border-radius:22px;padding:5px}.phone-screen{min-height:260px}.phone-head{height:39px;font-size:9px}.phone-body{padding:8px}.phone-title{font-size:10px;margin-bottom:8px}.scan{padding:9px 5px;font-size:9px}.select,.gps-ok{padding:7px;font-size:8px}.phone-nav{padding:7px 2px;font-size:6px}
+ .section{padding:52px 0}.section h2{font-size:31px}.feature-grid,.industry-grid{grid-template-columns:1fr}.industry-card img{height:210px}.industry-head{display:block}.cta-inner{display:block}.cta .btn{margin-top:20px}.foot{display:block;text-align:center}.foot strong{display:block;margin-bottom:10px}
 }
-
 </style>
 </head>
 <body>
 <header>
-  <div class="wrap nav">
-    <a class="brand" href="#"><img src="verifield-logo.png" alt="VeriField"></a>
-    <nav class="navlinks">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top"><img src="verifield-logo.png" alt="VeriField"></a>
+    <nav>
       <a href="#product">Product</a><a href="#solutions">Solutions</a><a href="#how">How It Works</a><a href="#pricing">Pricing</a><a href="#about">About Us</a>
     </nav>
-    <div class="navactions"><a class="btn ghost" href="#login">Login</a><a class="btn green" href="#demo">Request Demo</a></div>
+    <div class="actions"><a class="btn btn-outline" href="#login">Login</a><a class="btn btn-green" href="#demo">Request Demo</a></div>
   </div>
 </header>
 
-<main>
+<main id="top">
 <section class="hero" id="product">
-  <div class="wrap heroGrid">
+  <div class="wrap hero-grid">
     <div>
       <div class="eyebrow">FIELD OPERATIONS VERIFICATION PLATFORM</div>
-      <h1>Verify Work.<br><span>Everywhere</span><em>.</em></h1>
+      <h1>Verify Work.<br><span class="blue">Everywhere</span><span class="green">.</span></h1>
       <p class="lead">GPS verified. Photo proven. Inspection confirmed. VeriField gives cleaning, facility, construction and field-service teams a simple way to prove work was done.</p>
-      <div class="heroBtns"><a class="btn green" href="#demo">Request Demo →</a><a class="btn ghost" href="#how">See How It Works ▶</a></div>
-      <div class="pills"><span><b>✦</b>GPS Verification</span><span><b>▦</b>QR / Barcode Check-In</span><span><b>▣</b>Photo Evidence</span></div>
+      <div class="hero-actions"><a class="btn btn-green" href="#demo">Request Demo →</a><a class="btn btn-outline" href="#how">See How It Works ▶</a></div>
+      <div class="proof-row"><span><b>⌖</b> GPS Verification</span><span><b>▦</b> QR / Barcode Check-In</span><span><b>▣</b> Photo Evidence</span></div>
     </div>
-    <div class="dashboard" aria-label="VeriField operations dashboard preview">
-      <div class="dtop"><div class="dbrand"><img src="verifield-logo.png" alt="VeriField"></div><span>Operations Dashboard</span></div>
-      <div class="dbody">
-        <div class="stats"><div class="stat"><small>Workers</small><strong>18</strong></div><div class="stat"><small>Sites</small><strong>26</strong></div><div class="stat"><small>Check-Ins</small><strong>146</strong></div><div class="stat"><small>Verified</small><strong class="greenText">95%</strong></div></div>
+    <div class="visual">
+      <div class="dashboard">
+        <div class="dash-top"><div class="dash-brand"><span class="mark"></span>VeriField</div><div><div class="dash-title">Operations Dashboard</div><div class="dash-sub">Overview of today's field operations</div></div></div>
+        <div class="stats">
+          <div class="stat"><small>Workers</small><strong>18</strong></div><div class="stat"><small>Sites</small><strong>26</strong></div><div class="stat"><small>Check-Ins</small><strong>146</strong></div><div class="stat"><small>Verified</small><strong class="ok">95%</strong></div>
+        </div>
         <div class="table">
-          <div class="tr th"><span>Worker</span><span>Site</span><span>Time</span><span>Status</span><span>GPS</span><span>Photo</span></div>
-          <div class="tr"><span>John Smith</span><span>Main Office</span><span>8:02</span><span class="ok">Complete</span><span class="ok">✓</span><span class="ok">✓</span></div>
-          <div class="tr"><span>Mike Johnson</span><span>Warehouse</span><span>8:15</span><span class="ok">Complete</span><span class="ok">✓</span><span class="ok">✓</span></div>
-          <div class="tr"><span>Carlos Diaz</span><span>Cafeteria</span><span>8:22</span><span class="ok">Complete</span><span class="ok">✓</span><span class="ok">✓</span></div>
-          <div class="tr"><span>David Lee</span><span>Oil Office</span><span>8:35</span><span class="ok">Complete</span><span class="ok">✓</span><span class="ok">✓</span></div>
+          <div class="tr head"><span>Worker</span><span>Site</span><span>Time</span><span>Status</span><span>GPS</span><span>Photo</span></div>
+          <div class="tr"><span>John Smith</span><span>Main Office</span><span>8:02</span><span class="complete">Complete</span><span class="check">✓</span><span class="check">✓</span></div>
+          <div class="tr"><span>Mike Johnson</span><span>Warehouse</span><span>8:15</span><span class="complete">Complete</span><span class="check">✓</span><span class="check">✓</span></div>
+          <div class="tr"><span>Carlos Diaz</span><span>Cafeteria</span><span>8:22</span><span class="complete">Complete</span><span class="check">✓</span><span class="check">✓</span></div>
+          <div class="tr"><span>David Lee</span><span>Oil Office</span><span>8:35</span><span class="complete">Complete</span><span class="check">✓</span><span class="check">✓</span></div>
+        </div>
+        <div class="bottom-panels"><div class="mini"><div class="mini-title">Check-Ins by Status</div><div class="donut"></div></div><div class="mini"><div class="mini-title">Site Activity Map</div><div class="map"><i class="pin" style="left:28%;top:30%"></i><i class="pin" style="left:58%;top:55%"></i><i class="pin" style="left:77%;top:23%"></i></div></div></div>
+      </div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-head"><span>◉ VeriField</span><span>•••</span></div>
+          <div class="phone-body"><div class="phone-title">Check-In</div><div class="scan">▦ &nbsp; Scan QR Code</div><div class="or">OR</div><div class="select">Select a site　⌄</div><div class="gps-ok">✓ GPS location verified</div></div>
+          <div class="phone-nav"><span>⌂ Home</span><span>✓ Check-Ins</span><span>☷ Tasks</span><span>☰ More</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="solutions">
-  <div class="wrap center">
-    <div class="eyebrow dark">SIMPLE. PROFESSIONAL. VERIFIABLE.</div>
-    <h2>Everything you need to verify field work.</h2>
-    <p class="sub">Built around the core workflow: arrive, check in, capture evidence, and know exactly what happened.</p>
-    <div class="features">
+<section class="section light" id="solutions">
+  <div class="wrap center"><div class="kicker">SIMPLE. PROFESSIONAL. VERIFIABLE.</div><h2>Everything you need to verify field work.</h2><p class="section-intro">Built around the core workflow: arrive, check in, capture evidence, and know exactly what happened.</p>
+    <div class="feature-grid">
       <div class="feature"><div class="icon">⌖</div><h3>GPS Verification</h3><p>Capture the worker's check-in location and compare it with the assigned site.</p></div>
       <div class="feature"><div class="icon">▦</div><h3>QR / Barcode</h3><p>Scan the site code to make every check-in tied to the correct location.</p></div>
-      <div class="feature"><div class="icon">▣</div><h3>Photo Evidence</h3><p>Attach field photos at the site so completed work has visual proof.</p></div>
+      <div class="feature"><div class="icon">▣</div><h3>Photo Evidence</h3><p>Attach field photos so completed work has visual proof.</p></div>
       <div class="feature"><div class="icon">✓</div><h3>Verified Reports</h3><p>Give managers a clear record of time, location, status and evidence.</p></div>
     </div>
   </div>
 </section>
 
-<section class="industries" id="industries">
-  <div class="wrap">
-    <h2>Built for Every Industry</h2><div class="underline"></div>
-    <div class="cards">
-      <article class="card"><img src="clean.jpg" alt="Cleaning and janitorial work"><div class="cardbody"><div class="tag clean">VeriField Clean</div><h3>Cleaning & Janitorial</h3><p>Verify cleaning tasks, restroom checks, and site visits in real time.</p><a class="learn" href="#demo">Learn more →</a></div></article>
-      <article class="card"><img src="facility.jpg" alt="Facility maintenance work"><div class="cardbody"><div class="tag facility">VeriField Facility</div><h3>Facility Management</h3><p>Track maintenance, inspections, and facility operations.</p><a class="learn" href="#demo">Learn more →</a></div></article>
-      <article class="card"><img src="build.jpg" alt="Construction site work"><div class="cardbody"><div class="tag build">VeriField Build</div><h3>Construction</h3><p>Verify site visits, progress, safety inspections, and more.</p><a class="learn" href="#demo">Learn more →</a></div></article>
-      <article class="card"><img src="service.jpg" alt="Field service technician"><div class="cardbody"><div class="tag service">VeriField Service</div><h3>Field Service</h3><p>Verify service calls, tasks, and customer visits in the field.</p><a class="learn" href="#demo">Learn more →</a></div></article>
+<section class="industry" id="about">
+  <div class="wrap"><div class="industry-head"><div><h2>Built for Every Industry</h2><div class="under"></div></div></div>
+    <div class="industry-grid">
+      <article class="industry-card"><img src="clean.jpg" alt="Cleaning and janitorial work"><div class="content"><h3 style="color:#087cff">VeriField Clean</h3><div class="type">Cleaning & Janitorial</div><p>Verify cleaning tasks, restroom checks, and site visits in real time.</p><a class="learn" href="#demo">Learn more →</a></div></article>
+      <article class="industry-card"><img src="facility.jpg" alt="Facility maintenance work"><div class="content"><h3 style="color:#00a95c">VeriField Facility</h3><div class="type">Facility Management</div><p>Track maintenance, inspections, and facility operations.</p><a class="learn" href="#demo">Learn more →</a></div></article>
+      <article class="industry-card"><img src="build.jpg" alt="Construction field work"><div class="content"><h3 style="color:#ff8a00">VeriField Build</h3><div class="type">Construction</div><p>Verify site visits, progress, safety inspections, and more.</p><a class="learn" href="#demo">Learn more →</a></div></article>
+      <article class="industry-card"><img src="service.jpg" alt="Field service technician"><div class="content"><h3 style="color:#7a46e8">VeriField Service</h3><div class="type">Field Service</div><p>Verify service calls, tasks, and customer visits in the field.</p><a class="learn" href="#demo">Learn more →</a></div></article>
     </div>
   </div>
 </section>
 
 <section class="section" id="how">
-  <div class="wrap how">
-    <div><div class="eyebrow dark">HOW IT WORKS</div><h2>Four simple steps.<br>One clear record.</h2><div class="steps">
-      <div class="step"><div class="num">1</div><div><h3>Arrive at the site</h3><p>Open VeriField when the worker reaches the assigned location.</p></div></div>
-      <div class="step"><div class="num">2</div><div><h3>Scan the QR / barcode</h3><p>Identify the exact site and start the check-in.</p></div></div>
-      <div class="step"><div class="num">3</div><div><h3>Verify GPS & capture photo</h3><p>Record the location and attach visual evidence.</p></div></div>
-      <div class="step"><div class="num">4</div><div><h3>Review the record</h3><p>Managers see a simple, verifiable history of field activity.</p></div></div>
-    </div></div>
-    <div class="panel"><h3>Verification at a glance</h3><div class="check"><i>✓</i> Site identified by QR / barcode</div><div class="check"><i>✓</i> Check-in time recorded</div><div class="check"><i>✓</i> GPS distance measured</div><div class="check"><i>✓</i> Valid location confirmed</div><div class="check"><i>✓</i> Photo evidence attached</div></div>
-  </div>
+ <div class="wrap how-grid"><div><div class="kicker">HOW IT WORKS</div><h2>Four simple steps.<br>One clear record.</h2><div class="steps">
+  <div class="step"><div class="num">1</div><div><h4>Arrive at the site</h4><p>Open VeriField when the worker reaches the assigned location.</p></div></div>
+  <div class="step"><div class="num">2</div><div><h4>Scan the QR / barcode</h4><p>Identify the correct site and start the check-in.</p></div></div>
+  <div class="step"><div class="num">3</div><div><h4>Verify GPS & capture photo</h4><p>Record the location and attach visual evidence.</p></div></div>
+  <div class="step"><div class="num">4</div><div><h4>Review the record</h4><p>Managers see a simple, verifiable history of field activity.</p></div></div>
+ </div></div>
+ <div class="verification"><h3>Verification at a glance</h3><ul><li>Site identified by QR / barcode</li><li>Check-in time recorded</li><li>GPS distance measured</li><li>GPS location confirmed</li><li>Photo evidence attached</li></ul></div></div>
 </section>
 
-<section class="cta" id="demo"><div class="wrap ctaBox"><div><h2>Ready to see VeriField in action?</h2><p>Bring GPS verification, QR check-ins and photo evidence into one simple field-operations workflow.</p></div><a class="btn green" href="mailto:info@verifield.co?subject=VeriField%20Demo%20Request">Request Demo →</a></div></section>
+<section class="cta" id="demo"><div class="wrap cta-inner"><div><h2>Ready to see VeriField in action?</h2><p>Bring GPS verification, QR check-ins and photo evidence into one simple field-operations workflow.</p></div><a class="btn btn-green" href="mailto:info@verifield.co?subject=VeriField%20Demo%20Request">Request Demo →</a></div></section>
 </main>
-
-<footer id="about"><div class="wrap foot"><img src="verifield-logo.png" alt="VeriField"><span>© 2026 VeriField. Field Operations Verification Platform.</span></div></footer>
+<footer id="pricing"><div class="wrap foot"><strong>VeriField</strong><span>© 2026 VeriField · Verify Work. Everywhere.</span></div></footer>
 </body>
 </html>
