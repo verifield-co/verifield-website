@@ -79,11 +79,39 @@ completeBtn=document.getElementById('completeBtn'),recordStatus=document.getElem
 scanBtn=document.getElementById('scanBtn'),stopBtn=document.getElementById('stopBtn'),reader=document.getElementById('reader'),qrStatus=document.getElementById('qrStatus');
 let gps=null,photoData=null,qrText=null,scanner=null,scanning=false;
 const SITE_CODES={
-  'VERIFIELD-MAIN-OFFICE':'Main Office','MAIN-OFFICE':'Main Office','MAINOFFICE':'Main Office',
-  'VERIFIELD-WAREHOUSE-1':'Warehouse 1','WAREHOUSE-1':'Warehouse 1','WAREHOUSE1':'Warehouse 1',
-  'VERIFIELD-MAIN-CAFETERIA':'Main Cafeteria','MAIN-CAFETERIA':'Main Cafeteria','MAINCafeteria':'Main Cafeteria',
-  'VERIFIELD-OIL-OFFICE':'Oil Office','OIL-OFFICE':'Oil Office','OILOFFICE':'Oil Office',
-  'VERIFIELD-LOGISTICS-OFFICE':'Logistics Office','LOGISTICS-OFFICE':'Logistics Office','LOGISTICSOFFICE':'Logistics Office'
+  'QR-001':'Main Office',
+  'QR-002':'Main Training Room',
+  'QR-003':'Main LAB',
+  'QR-004':'Main Cafeteria',
+  'QR-005':'Main Restroom',
+  'QR-006':'Oil Office',
+  'QR-007':'Logistics Office',
+  'QR-008':'Oil Restroom',
+  'QR-009':'Smoke Area1',
+  'QR-010':'Stamp Office',
+  'QR-011':'Stamp Cafeteria',
+  'QR-012':'Stamp Restroom',
+  'QR-013':'Tool Crib Office 2nd',
+  'QR-014':'Fuel Office',
+  'QR-015':'Fuel Restroom 1 S',
+  'QR-016':'OE Shipping Office',
+  'QR-017':'OE Restroom',
+  'QR-018':'OE Cafeteria',
+  'QR-019':'OE Smoke Area',
+  'QR-020':'Tool Room',
+  'QR-021':'QC Lab',
+  'QR-022':'Tool Room 2nd',
+  'QR-023':'Air Office',
+  'QR-024':'Air Cafeteria',
+  'QR-025':'Air Restroom',
+  'QR-026':'Air Locker',
+  'QR-027':'Warehouse 1',
+  'QR-028':'Warehouse 2',
+  'QR-029':'Warehouse 3',
+  'QR-030':'Warehouse 4',
+  'QR-031':'Warehouse 5',
+  'QR-032':'Warehouse 6',
+  'QR-033':'Warehouse S'
 };
 
 function checkReady(){completeBtn.disabled=!(site.value && gps && photoData)}
