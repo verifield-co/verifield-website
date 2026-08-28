@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VeriField | Start Check-In</title>
+<style>
+:root{--nav:#061936;--blue:#087cff;--green:#00bd68;--ink:#10213d;--muted:#66758c;--line:#dfe7f0;--bg:#f5f8fc;--red:#e34b4b}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{text-decoration:none;color:inherit}.app{min-height:100vh;display:flex}.side{width:230px;background:linear-gradient(180deg,#061936,#09285a);color:#fff;padding:22px 14px;display:flex;flex-direction:column}
+.brand{padding:0 8px 22px;border-bottom:1px solid #ffffff20}.brand img{width:150px;max-height:48px;object-fit:contain;object-position:left}
+.nav{display:grid;gap:6px;padding-top:18px}.nav a{padding:11px 12px;border-radius:8px;font-size:13px;font-weight:700;color:#dce8f7}.nav a:hover,.nav a.active{background:var(--blue);color:#fff}
+.user{margin-top:auto;border-top:1px solid #ffffff20;padding:16px 8px;font-size:12px}.user span{display:block;color:#9fb4d2;font-size:10px;margin-top:3px}
+.main{flex:1;min-width:0}.top{height:76px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px}.top h1{margin:0;font-size:22px}.top p{margin:4px 0 0;color:var(--muted);font-size:11px}
+.back{border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-weight:700;font-size:11px}.content{max-width:1050px;margin:auto;padding:28px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 5px 18px #1428460b}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:16px;border-bottom:1px solid var(--line)}
+.step{display:flex;gap:9px;align-items:center;color:#738198;font-size:11px;font-weight:800}.step .num{width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:#edf4ff;color:var(--blue)}.step.active{color:var(--ink)}.step.active .num{background:var(--blue);color:#fff}.body{padding:24px}
+h2{margin:0 0 6px;font-size:20px}.sub{color:var(--muted);font-size:12px;margin:0 0 22px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{margin-bottom:15px}.field label{display:block;font-size:11px;font-weight:800;margin-bottom:7px}.field select,.field input[type=text]{width:100%;height:44px;border:1px solid #cfdae7;border-radius:8px;padding:0 12px;font-size:12px;background:#fff}
+.action{display:flex;gap:9px;flex-wrap:wrap}.btn{border:0;border-radius:8px;padding:12px 17px;font-size:12px;font-weight:900;cursor:pointer}.btn.blue{background:var(--blue);color:#fff}.btn.green{background:var(--green);color:#fff}.btn.light{background:#eef5ff;color:#1263b7}.btn:disabled{opacity:.5;cursor:not-allowed}
+.status{border:1px solid var(--line);border-radius:10px;padding:13px;margin-top:10px;background:#fbfdff;font-size:11px}.status b{display:block;font-size:12px;margin-bottom:4px}.ok{color:#009d59}.warn{color:#b66a00}.bad{color:#c73535}
+.photo{border:2px dashed #cbd8e8;border-radius:10px;padding:20px;text-align:center;background:#fafcff}.photo input{display:none}.photo label{display:inline-block;padding:11px 15px;border-radius:8px;background:#edf5ff;color:#0768c9;font-weight:800;font-size:11px;cursor:pointer}.preview{max-width:100%;max-height:230px;margin:14px auto 0;border-radius:9px;display:none}
+.qr{border:1px solid var(--line);border-radius:10px;padding:14px}.qr video{width:100%;max-height:230px;border-radius:8px;background:#071936;display:none}.qr canvas{display:none}.qr-note{font-size:10px;color:var(--muted);line-height:1.5;margin-top:9px}
+.complete{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}.record{font-size:10px;color:var(--muted)}.record strong{color:var(--ink)}
+.toast{position:fixed;right:20px;bottom:20px;background:#062044;color:#fff;padding:13px 16px;border-radius:9px;font-size:11px;box-shadow:0 8px 25px #0003;display:none}
+@media(max-width:800px){.side{display:none}.top{height:64px;padding:0 15px}.top h1{font-size:18px}.content{padding:15px 12px 25px}.grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.complete{align-items:flex-start;flex-direction:column}}
+@media(max-width:480px){.steps{grid-template-columns:1fr}.body{padding:18px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><a href="index.html"><img src="verifield-logo.png" alt="VeriField"></a></div>
+  <nav class="nav">
+    <a href="verifield-dashboard.html">▣ &nbsp; Dashboard</a><a href="#sites">⌖ &nbsp; Sites</a><a href="#workers">♙ &nbsp; Workers</a>
+    <a class="active" href="checkin.html">✓ &nbsp; Check-Ins</a><a href="#tasks">☑ &nbsp; Tasks</a><a href="#inspections">◫ &nbsp; Inspections</a>
+    <a href="#reports">▤ &nbsp; Reports</a><a href="#photos">▧ &nbsp; Photos</a><a href="#settings">⚙ &nbsp; Settings</a>
+  </nav>
+  <div class="user"><b>John Manager</b><span>Administrator</span></div>
+</aside>
+<div class="main">
+<header class="top"><div><h1>Start Check-In</h1><p>QR / barcode, GPS verification and photo evidence</p></div><a class="back" href="verifield-dashboard.html">← Dashboard</a></header>
+<main class="content">
+<section class="card">
+<div class="steps"><div class="step active"><span class="num">1</span>Identify Site</div><div class="step"><span class="num">2</span>Verify GPS</div><div class="step"><span class="num">3</span>Photo Evidence</div><div class="step"><span class="num">4</span>Complete</div></div>
+<div class="body">
+<h2>New field check-in</h2><p class="sub">Select the assigned site, scan its QR/barcode, capture your location and attach a photo.</p>
+<div class="grid">
+<div>
+<div class="field"><label for="site">Assigned site</label><select id="site"><option value="">Select a site</option><option>Main Office</option><option>Warehouse 1</option><option>Main Cafeteria</option><option>Oil Office</option><option>Logistics Office</option></select></div>
+<div class="qr">
+<div class="field"><label>QR / Barcode</label></div>
+<div class="action">
+<button class="btn blue" id="scanBtn" type="button">▦ Scan QR / Barcode</button>
+<button class="btn light" id="stopBtn" type="button" style="display:none">Stop Camera</button>
+</div>
+<div id="reader" style="width:100%;margin-top:10px;display:none"></div>
+<div class="qr-note" id="qrStatus">Scan the QR code assigned to this site. The site will be selected automatically.</div>
+</div>
+<div class="status" id="siteStatus"><b>Site status</b><span class="warn">Select the assigned site to begin.</span></div>
+</div>
+<div>
+<div class="field"><label>GPS verification</label><div class="action"><button class="btn green" id="gpsBtn" type="button">📍 Capture GPS Location</button></div><div class="status" id="gpsStatus"><b>GPS status</b><span class="warn">Not captured yet.</span></div></div>
+<div class="field"><label>Photo evidence</label><div class="photo"><label for="photo">📷 Take / Select Photo</label><input id="photo" type="file" accept="image/*" capture="environment"><img id="preview" class="preview" alt="Photo preview"></div></div>
+</div>
+</div>
+<div class="complete"><div class="record" id="recordStatus">No check-in created yet.</div><button class="btn green" id="completeBtn" type="button" disabled>Complete Check-In →</button></div>
+</div>
+</section>
+</main>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+<script>
+const site=document.getElementById('site'),siteStatus=document.getElementById('siteStatus'),gpsBtn=document.getElementById('gpsBtn'),
+gpsStatus=document.getElementById('gpsStatus'),photo=document.getElementById('photo'),preview=document.getElementById('preview'),
+completeBtn=document.getElementById('completeBtn'),recordStatus=document.getElementById('recordStatus'),toast=document.getElementById('toast'),
+scanBtn=document.getElementById('scanBtn'),stopBtn=document.getElementById('stopBtn'),reader=document.getElementById('reader'),qrStatus=document.getElementById('qrStatus');
+let gps=null,photoData=null,qrText=null,scanner=null,scanning=false;
+const SITE_CODES={
+  'VERIFIELD-MAIN-OFFICE':'Main Office','MAIN-OFFICE':'Main Office','MAINOFFICE':'Main Office',
+  'VERIFIELD-WAREHOUSE-1':'Warehouse 1','WAREHOUSE-1':'Warehouse 1','WAREHOUSE1':'Warehouse 1',
+  'VERIFIELD-MAIN-CAFETERIA':'Main Cafeteria','MAIN-CAFETERIA':'Main Cafeteria','MAINCafeteria':'Main Cafeteria',
+  'VERIFIELD-OIL-OFFICE':'Oil Office','OIL-OFFICE':'Oil Office','OILOFFICE':'Oil Office',
+  'VERIFIELD-LOGISTICS-OFFICE':'Logistics Office','LOGISTICS-OFFICE':'Logistics Office','LOGISTICSOFFICE':'Logistics Office'
+};
+
+function checkReady(){completeBtn.disabled=!(site.value && gps && photoData)}
+site.onchange=()=>{siteStatus.innerHTML='<b>Site status</b><span class="ok">✓ '+site.value+' selected.</span>';checkReady()};
+
+gpsBtn.onclick=()=>{
+ if(!navigator.geolocation){gpsStatus.innerHTML='<b>GPS status</b><span class="bad">Location is not supported by this browser.</span>';return}
+ gpsStatus.innerHTML='<b>GPS status</b><span class="warn">Requesting your current location…</span>';
+ navigator.geolocation.getCurrentPosition(p=>{
+   gps={lat:p.coords.latitude,lng:p.coords.longitude,accuracy:Math.round(p.coords.accuracy),time:new Date().toISOString()};
+   gpsStatus.innerHTML='<b>GPS status</b><span class="ok">✓ Location captured. Accuracy ±'+gps.accuracy+' m<br>Lat '+gps.lat.toFixed(6)+' · Lng '+gps.lng.toFixed(6)+'</span>';
+   checkReady();
+ },e=>{gpsStatus.innerHTML='<b>GPS status</b><span class="bad">GPS could not be captured. Please allow location access and try again.</span>'},{enableHighAccuracy:true,timeout:15000,maximumAge:0});
+};
+
+photo.onchange=()=>{
+ const f=photo.files[0]; if(!f)return;
+ const r=new FileReader(); r.onload=()=>{photoData=r.result;preview.src=photoData;preview.style.display='block';checkReady()}; r.readAsDataURL(f);
+};
+
+async function startScan(){
+ if(!window.Html5Qrcode){
+   qrStatus.innerHTML='<span class="bad">QR scanner library could not load. You can still select the site manually.</span>';
+   return;
+ }
+ try{
+   reader.style.display='block';
+   scanBtn.style.display='none';
+   stopBtn.style.display='inline-block';
+   qrStatus.textContent='Point the phone camera at the VeriField site QR code…';
+   scanner=new Html5Qrcode("reader");
+   scanning=true;
+   await scanner.start(
+     {facingMode:"environment"},
+     {fps:10,qrbox:{width:220,height:220}},
+     onCodeScanned,
+     ()=>{}
+   );
+ }catch(e){
+   scanning=false;
+   reader.style.display='none';
+   scanBtn.style.display='inline-block';
+   stopBtn.style.display='none';
+   qrStatus.innerHTML='<span class="bad">Camera access was blocked or unavailable. Allow camera access and try again.</span>';
+ }
+}
+function normalizeCode(value){
+ return String(value||'').trim().toUpperCase().replace(/\s+/g,'-');
+}
+function onCodeScanned(decodedText){
+ const code=normalizeCode(decodedText);
+ qrText=decodedText;
+ const matched=SITE_CODES[code];
+ if(matched){
+   site.value=matched;
+   siteStatus.innerHTML='<b>Site status</b><span class="ok">✓ '+matched+' selected automatically from QR code.</span>';
+   qrStatus.innerHTML='<span class="ok">✓ QR verified: '+decodedText+' → '+matched+'</span>';
+ }else{
+   qrStatus.innerHTML='<span class="warn">Code scanned: '+decodedText+'. This code is not assigned to a site yet.</span>';
+ }
+ stopScan();
+ checkReady();
+}
+async function stopScan(){
+ if(scanner){
+   try{ if(scanning) await scanner.stop(); }catch(e){}
+   try{ scanner.clear(); }catch(e){}
+ }
+ scanner=null;scanning=false;
+ reader.style.display='none';
+ scanBtn.style.display='inline-block';
+ stopBtn.style.display='none';
+}
+scanBtn.onclick=startScan;stopBtn.onclick=stopScan;
+
+completeBtn.onclick=()=>{
+ const record={id:'VF-'+Date.now(),site:site.value,qr:qrText||'manual-site-selection',gps,photo:photoData,timestamp:new Date().toISOString(),status:'Completed'};
+ const records=JSON.parse(localStorage.getItem('verifieldCheckins')||'[]');records.unshift(record);localStorage.setItem('verifieldCheckins',JSON.stringify(records.slice(0,50)));
+ recordStatus.innerHTML='<strong>Check-in completed.</strong> '+site.value+' · '+new Date(record.timestamp).toLocaleString();
+ showToast('✓ Check-in saved successfully');
+ completeBtn.disabled=true;
+ setTimeout(()=>window.location.href='verifield-dashboard.html',700);
+};
+function showToast(t){toast.textContent=t;toast.style.display='block';setTimeout(()=>toast.style.display='none',2500)}
+</script>
+</body>
+</html>
