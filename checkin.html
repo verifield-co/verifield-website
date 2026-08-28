@@ -148,22 +148,12 @@ async function startScan(){
     scanner=new Html5Qrcode("reader");
     scanning=true;
 
-    const config={
-      fps:15,
-      qrbox:function(viewfinderWidth,viewfinderHeight){
-        const size=Math.floor(Math.min(viewfinderWidth,viewfinderHeight)*0.70);
-        return {width:size,height:size};
-      },
-      aspectRatio:1.0,
-      disableFlip:false,
-      formatsToSupport:[
-        Html5QrcodeSupportedFormats.QR_CODE
-      ]
-    };
-
     await scanner.start(
       {facingMode:"environment"},
-      config,
+      {
+        fps:10,
+        qrbox:{width:220,height:220}
+      },
       onCodeScanned,
       function(errorMessage){}
     );
@@ -174,7 +164,7 @@ async function startScan(){
     scanBtn.style.display='inline-block';
     stopBtn.style.display='none';
 
-    qrStatus.innerHTML='<span class="bad">Camera scanner could not start. Please allow camera access and try again.</span>';
+    qrStatus.innerHTML='<span class="bad">Camera access was blocked or unavailable. Allow camera access and try again.</span>';
     console.error(e);
   }
 }
