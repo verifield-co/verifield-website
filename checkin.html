@@ -133,30 +133,50 @@ photo.onchange=()=>{
 };
 
 async function startScan(){
- if(!window.Html5Qrcode){
-   qrStatus.innerHTML='<span class="bad">QR scanner library could not load. You can still select the site manually.</span>';
-   return;
- }
- try{
-   reader.style.display='block';
-   scanBtn.style.display='none';
-   stopBtn.style.display='inline-block';
-   qrStatus.textContent='Point the phone camera at the VeriField site QR code…';
-   scanner=new Html5Qrcode("reader");
-   scanning=true;
-   await scanner.start(
-     {facingMode:"environment"},
-     {fps:10,qrbox:{width:220,height:220}},
-     onCodeScanned,
-     ()=>{}
-   );
- }catch(e){
-   scanning=false;
-   reader.style.display='none';
-   scanBtn.style.display='inline-block';
-   stopBtn.style.display='none';
-   qrStatus.innerHTML='<span class="bad">Camera access was blocked or unavailable. Allow camera access and try again.</span>';
- }
+  if(!window.Html5Qrcode){
+    qrStatus.innerHTML='<span class="bad">QR scanner library could not load. You can still select the site manually.</span>';
+    return;
+  }
+
+  try{
+    reader.style.display='block';
+    scanBtn.style.display='none';
+    stopBtn.style.display='inline-block';
+
+    qrStatus.textContent='Point the phone camera at the VeriField site QR code...';
+
+    scanner=new Html5Qrcode("reader");
+    scanning=true;
+
+    const config={
+      fps:15,
+      qrbox:function(viewfinderWidth,viewfinderHeight){
+        const size=Math.floor(Math.min(viewfinderWidth,viewfinderHeight)*0.70);
+        return {width:size,height:size};
+      },
+      aspectRatio:1.0,
+      disableFlip:false,
+      formatsToSupport:[
+        Html5QrcodeSupportedFormats.QR_CODE
+      ]
+    };
+
+    await scanner.start(
+      {facingMode:"environment"},
+      config,
+      onCodeScanned,
+      function(errorMessage){}
+    );
+
+  }catch(e){
+    scanning=false;
+    reader.style.display='none';
+    scanBtn.style.display='inline-block';
+    stopBtn.style.display='none';
+
+    qrStatus.innerHTML='<span class="bad">Camera scanner could not start. Please allow camera access and try again.</span>';
+    console.error(e);
+  }
 }
 function normalizeCode(value){
  return String(value||'').trim().toUpperCase().replace(/\s+/g,'-');
