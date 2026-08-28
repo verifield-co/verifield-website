@@ -149,15 +149,27 @@ async function startScan(){
     scanning=true;
 
     await scanner.start(
-  {facingMode:"environment"},
+  { facingMode: { exact: "environment" } },
   {
-    fps:10,
-    qrbox:{width:300,height:300},
-    aspectRatio:1.0,
-    disableFlip:false
+    fps: 20,
+    qrbox: function(viewfinderWidth, viewfinderHeight) {
+      const size = Math.floor(
+        Math.min(viewfinderWidth, viewfinderHeight) * 0.80
+      );
+      return {
+        width: size,
+        height: size
+      };
+    },
+    aspectRatio: 1.0,
+    disableFlip: false
   },
-  onCodeScanned,
-  function(errorMessage){}
+  function(decodedText) {
+    onCodeScanned(decodedText);
+  },
+  function(errorMessage) {
+    // Keep scanning; normal decode failures are ignored.
+  }
 );
 
   }catch(e){
