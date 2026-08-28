@@ -181,7 +181,34 @@ async function startScan(){
 function normalizeCode(value){
  return String(value||'').trim().toUpperCase().replace(/\s+/g,'-');
 }
-function onCodeScanned(decodedText){
+async function onCodeScanned(decodedText){
+  const code=normalizeCode(decodedText);
+  qrText=decodedText;
+
+  const matched=SITE_CODES[code];
+
+  if(matched){
+    site.value=matched;
+
+    siteStatus.innerHTML='<b>Site status</b><span class="ok">✓ '+matched+' selected automatically from QR code.</span>';
+
+    qrStatus.innerHTML='<span class="ok">✓ QR verified: '+decodedText+' → '+matched+'</span>';
+
+    await stopScan();
+
+    checkReady();
+
+    setTimeout(()=>{
+      document.getElementById('gpsBtn').scrollIntoView({
+        behavior:'smooth',
+        block:'center'
+      });
+    },300);
+
+  }else{
+    qrStatus.innerHTML='<span class="warn">Code scanned: '+decodedText+'. This code is not assigned to a site yet.</span>';
+  }
+}
  const code=normalizeCode(decodedText);
  qrText=decodedText;
  const matched=SITE_CODES[code];
