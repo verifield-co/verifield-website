@@ -181,7 +181,23 @@ async function startScan(){
 function normalizeCode(value){
  return String(value||'').trim().toUpperCase().replace(/\s+/g,'-');
 }
-async function onCodeScanned(decodedText){
+function onCodeScanned(decodedText){
+  const code=normalizeCode(decodedText);
+  qrText=decodedText;
+
+  const matched=SITE_CODES[code];
+
+  if(matched){
+    site.value=matched;
+    siteStatus.innerHTML='<b>Site status</b><span class="ok">✓ '+matched+' selected automatically from QR code.</span>';
+    qrStatus.innerHTML='<span class="ok">✓ QR verified: '+decodedText+' → '+matched+'</span>';
+  }else{
+    qrStatus.innerHTML='<span class="warn">Code scanned: '+decodedText+'. This code is not assigned to a site yet.</span>';
+  }
+
+  stopScan();
+  checkReady();
+}
   const code=normalizeCode(decodedText);
   qrText=decodedText;
 
