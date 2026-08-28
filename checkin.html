@@ -149,14 +149,16 @@ async function startScan(){
     scanning=true;
 
     await scanner.start(
-      {facingMode:"environment"},
-      {
-        fps:10,
-        qrbox:{width:220,height:220}
-      },
-      onCodeScanned,
-      function(errorMessage){}
-    );
+  {facingMode:"environment"},
+  {
+    fps:10,
+    qrbox:{width:300,height:300},
+    aspectRatio:1.0,
+    disableFlip:false
+  },
+  onCodeScanned,
+  function(errorMessage){}
+);
 
   }catch(e){
     scanning=false;
